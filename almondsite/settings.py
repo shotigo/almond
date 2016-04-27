@@ -115,6 +115,7 @@ USE_L10N = True
 
 USE_TZ = True
 
+LOGIN_REDIRECT_URL = '/'
 
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/1.9/howto/static-files/
@@ -135,3 +136,4 @@ try:
     from .local_settings import *
 except ImportError:
     pass
+

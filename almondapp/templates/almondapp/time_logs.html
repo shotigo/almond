@@ -1,0 +1,52 @@
+{% extends 'almondapp/base.html' %}
+
+{% block content %}
+
+    </br></br> </br></br> </br></br>
+<div id="navcontainer">
+    <ul class="nav nav-tabs">
+        <li class="active">
+            <a href="#logs"  data-toggle="tab">Logs</a>
+        </li>
+        <li>
+            <a href="#reports"  data-toggle="tab">Reports</a>
+        </li>
+    </ul>     
+        <div id="logs">   
+            <form method="POST" action="." class="post-form" id="checkin">
+            {% csrf_token %}
+                </br></br>
+                 <div class="input-group">
+                    <input type=hidden name="check" value="checkin"/>
+                    <input type="text" name="caption" class="form-control" placeholder="Brush, brush, brush. 3 times a day...">
+                    <span class="input-group-btn">
+                    <button class="btn btn-secondary" type="submit" name="checkin" ><span class="glyphicon glyphicon-save"></span> Check-in</button>
+                    </span>
+                </div>
+            </form> 
+            {% for log in logs %}
+            <div class="panel panel-primary">
+                <div class="panel-heading">{{ log.employee }}'s Log</div>
+                <div class="panel-body">
+                    <h4>Checkin: {{ log.check_in_date_time}}</h4> 
+                    <h4>Caption: {{ log.caption}} </h4>
+                    {% if check_out_date_time = None %}
+                    <form method="POST" action="." class="post-form" id="checkout">
+                    {% csrf_token %}
+                    <input type=hidden name="check" value="checkout"/>
+                    <button class="btn btn-secondary pull-right" type="submit"><span class="glyphicon glyphicon-open"></span> Check-out
+                    </button>
+                    </form>
+                    {% else %}
+                    <p class="text-xs-right">Remaining Time is: </p>
+                    {% endif %}
+                </div>
+            </div>
+        </div>
+        <div id="reports">
+            
+        </div> 
+    </div>
+        {% endfor %}
+{% endblock %}
+
